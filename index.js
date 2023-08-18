@@ -24,3 +24,15 @@ function operate(num1, op, num2) {
   if (op === "*") return multiply(num1, num2);
   if (op === "/") return divide(num1, num2);
 }
+
+const display = document.querySelector("#display-text");
+
+let displayVal = "";
+const numButtons = document.querySelectorAll(".num");
+numButtons.forEach((button) => {
+  button.addEventListener("click", () => {
+    let selected = button.textContent;
+    displayVal += selected;
+    display.textContent += selected;
+  });
+});
