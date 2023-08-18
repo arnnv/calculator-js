@@ -35,13 +35,15 @@ body {
   display: flex;
   justify-content: right;
   align-items: flex-end;
-  padding: 8px;
+  padding: 2px;
   font-size: 48px;
-  flex-wrap: wrap;
-  text-overflow: clip;
 }
 
 #display-text {
+  /* overflow: hidden;
+  text-overflow: clip; */
+  border: 2px solid red;
+  max-width: 350px;
 }
 
 .buttons {

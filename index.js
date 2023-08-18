@@ -1,29 +1,21 @@
 function add(a, b) {
-  return a + b;
+  return Math.round((a + b) * 1000) / 1000;
 }
 
 function subtract(a, b) {
-  return a - b;
+  return Math.round((a - b) * 1000) / 1000;
 }
 
 function multiply(a, b) {
-  return a * b;
+  return Math.round(a * b * 1000) / 1000;
 }
 
 function divide(a, b) {
-  return a / b;
+  return Math.round((a / b) * 1000) / 1000;
 }
 
 function modulus(a, b) {
-  return a % b;
-}
-
-function operate(num1, op, num2) {
-  if (op === "+") return add(num1, num2);
-  if (op === "-") return subtract(num1, num2);
-  if (op === "*") return multiply(num1, num2);
-  if (op === "/") return divide(num1, num2);
-  if (op === "%") return modulus(num1, num2);
+  return Math.round((a % b) * 1000) / 1000;
 }
 
 const display = document.querySelector("#display-text");
@@ -32,9 +24,24 @@ let num1 = "";
 let num2 = "";
 let operator = "";
 
+function operate(a, oper, b) {
+  if (oper === "+") return add(a, b);
+  if (oper === "-") return subtract(a, b);
+  if (oper === "*") return multiply(a, b);
+  if (oper === "/") {
+    if (b === 0) {
+      num1 = num2 = operator = "";
+      return "ERROR";
+    }
+    return divide(a, b);
+  }
+  if (oper === "%") return modulus(a, b);
+}
+
 const numButtons = document.querySelectorAll(".num");
 numButtons.forEach((button) => {
   button.addEventListener("click", () => {
+    if (num1 === "") display.textContent = "";
     if (display.textContent.length <= 12) {
       let selected = button.textContent;
       if (operator === "") {
@@ -80,5 +87,9 @@ equals.addEventListener("click", () => {
 const clear = document.querySelector("#clear");
 clear.addEventListener("click", () => {
   display.textContent = "";
-  num1 = num2 = op = "";
+  num1 = num2 = operator = "";
+});
+
+display.addEventListener("resize", () => {
+  console.log("hi");
 });
