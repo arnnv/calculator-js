@@ -18,10 +18,6 @@ function modulus(a, b) {
   return a % b;
 }
 
-let num1;
-let num2;
-let op;
-
 function operate(num1, op, num2) {
   if (op === "+") return add(num1, num2);
   if (op === "-") return subtract(num1, num2);
@@ -32,25 +28,64 @@ function operate(num1, op, num2) {
 
 const display = document.querySelector("#display-text");
 
-let displayVal = "";
+let num1 = "";
+let num2 = "";
 let operator = "";
-let afterOperator = "";
 
 const numButtons = document.querySelectorAll(".num");
 numButtons.forEach((button) => {
   button.addEventListener("click", () => {
     if (display.textContent.length <= 12) {
       let selected = button.textContent;
-      displayVal += selected;
+      if (operator === "") {
+        num1 += selected;
+      } else {
+        display.textContent = "";
+        num2 += selected;
+      }
       display.textContent += selected;
     }
   });
 });
 
+function performOperation(op, a, b) {
+  let operated = operate(parseInt(a), op, parseInt(b));
+  num1 = operated.toString();
+  num2 = "";
+  display.textContent = operated;
+  console.log(`${a} ${op} ${b} = ${operated}`);
+}
+
 const operationButtons = document.querySelectorAll(".op");
 operationButtons.forEach((button) => {
   button.addEventListener("click", () => {
-    let operator = button.textContent;
-    console.log(operator);
+    if (operator !== "") {
+      if (num2 !== "") {
+        performOperation(operator, num1, num2);
+      }
+    }
+
+    operator = button.textContent;
   });
 });
+
+// operationButtons.forEach((button) => {
+//   button.addEventListener("click", () => {
+//     if (!operator) {
+//       operator = button.textContent;
+//     }
+//     let newOperator = button.textContent;
+
+//     if (num1) {
+//       display.textContent += operator;
+//       if (num2) {
+//         let operation = operate(parseInt(num1), operator, parseInt(num2));
+//         console.log(operation);
+//         num1 = operation;
+//         operator = "";
+//         num2 = "";
+//       }
+//     }
+//     operator = newOperator;
+//   });
+// });
