@@ -49,34 +49,45 @@ function removeSelectedOperator() {
   });
 }
 
+function storeInput(num, selected) {
+  if (selected === ".") {
+    if (!num.includes(".")) {
+      calculatorDisplay.textContent += selected;
+      return (num += selected);
+    }
+  } else {
+    calculatorDisplay.textContent += selected;
+    return (num += selected);
+  }
+}
+
+function updateNumberAndDisplay(number, selected) {
+  if (selected === "." && !number.includes(".")) {
+    number += selected;
+  } else if (selected !== ".") {
+    number += selected;
+  }
+
+  calculatorDisplay.textContent = number;
+
+  if (operator === "") {
+    num1 = number;
+  } else {
+    num2 = number;
+  }
+}
+
 numberButtons.forEach((button) => {
   button.addEventListener("click", () => {
     removeSelectedOperator();
 
-    if (num1 === "") calculatorDisplay.textContent = "";
-    let selected = button.textContent;
+    const selected = button.textContent;
 
     if (calculatorDisplay.textContent.length <= 12) {
       if (operator === "") {
-        if (selected === ".") {
-          if (!num1.includes(".")) {
-            num1 += selected;
-            calculatorDisplay.textContent += selected;
-          }
-        } else {
-          num1 += selected;
-          calculatorDisplay.textContent += selected;
-        }
+        updateNumberAndDisplay(num1, selected);
       } else {
-        if (selected === ".") {
-          if (!num2.includes(".")) {
-            num2 += selected;
-            calculatorDisplay.textContent = num2;
-          }
-        } else {
-          num2 += selected;
-          calculatorDisplay.textContent = num2;
-        }
+        updateNumberAndDisplay(num2, selected);
       }
     }
   });
