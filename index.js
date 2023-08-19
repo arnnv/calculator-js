@@ -8,61 +8,80 @@ const operationButtons = document.querySelectorAll(".op");
 const equalsButton = document.querySelector("#equals");
 const clearButton = document.querySelector("#clear");
 
+function roundResult(exp) {
+  return Math.round(exp * 1000) / 1000;
+}
 function add(a, b) {
-  return Math.round((a + b) * 1000) / 1000;
+  a = parseFloat(a);
+  b = parseFloat(b);
+  return roundResult(a + b);
 }
-
 function subtract(a, b) {
-  return Math.round((a - b) * 1000) / 1000;
+  return roundResult(a - b);
 }
-
 function multiply(a, b) {
-  return Math.round(a * b * 1000) / 1000;
+  return roundResult(a * b);
 }
-
 function divide(a, b) {
-  return Math.round((a / b) * 1000) / 1000;
+  return roundResult(a / b);
 }
-
 function modulus(a, b) {
-  return Math.round((a % b) * 1000) / 1000;
+  return roundResult(a % b);
 }
 
-function operate(a, oper, b) {
-  if (oper === "+") return add(a, b);
-  if (oper === "-") return subtract(a, b);
-  if (oper === "*") return multiply(a, b);
-  if (oper === "/") {
+function operate(a, op, b) {
+  if (op === "+") return add(a, b);
+  if (op === "-") return subtract(a, b);
+  if (op === "*") return multiply(a, b);
+  if (op === "/") {
     if (b === 0) {
       num1 = num2 = operator = "";
       return "ERROR";
     }
     return divide(a, b);
   }
-  if (oper === "%") return modulus(a, b);
+  if (op === "%") return modulus(a, b);
+}
+function performOperation(op, a, b) {
+  return operate(a, op, b);
 }
 
-function performOperation(op, a, b) {
-  return operate(parseInt(a), op, parseInt(b));
+function removeSelectedOperator() {
+  operationButtons.forEach((opnBtn) => {
+    if (opnBtn.classList.contains("buttonClick")) {
+      opnBtn.classList.remove("buttonClick");
+    }
+  });
 }
 
 numberButtons.forEach((button) => {
   button.addEventListener("click", () => {
-    operationButtons.forEach((opnBtn) => {
-      if (opnBtn.classList.contains("buttonClick")) {
-        opnBtn.classList.remove("buttonClick");
-      }
-    });
+    removeSelectedOperator();
 
     if (num1 === "") calculatorDisplay.textContent = "";
+    let selected = button.textContent;
+
     if (calculatorDisplay.textContent.length <= 12) {
-      let selected = button.textContent;
       if (operator === "") {
-        num1 += selected;
-        calculatorDisplay.textContent += selected;
+        if (selected === ".") {
+          if (!num1.includes(".")) {
+            num1 += selected;
+            calculatorDisplay.textContent += selected;
+          }
+        } else {
+          num1 += selected;
+          calculatorDisplay.textContent += selected;
+        }
       } else {
-        num2 += selected;
-        calculatorDisplay.textContent = num2;
+        if (selected === ".") {
+          if (!num2.includes(".")) {
+            num2 += selected;
+            calculatorDisplay.textContent = num2;
+          }
+        } else {
+          num2 += selected;
+          calculatorDisplay.textContent = num2;
+        }
       }
     }
   });
