@@ -143,7 +143,6 @@ const modBtn = document.querySelector("#mod");
 const dotBtn = document.querySelector("#dot");
 
 document.addEventListener("keydown", (e) => {
-  e.preventDefault();
   let keyPressed = e.key;
 
   switch (keyPressed) {
@@ -157,6 +156,7 @@ document.addEventListener("keydown", (e) => {
       multiplyBtn.click();
       break;
     case "/":
+      e.preventDefault();
       divideBtn.click();
       break;
     case "%":
