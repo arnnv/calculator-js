@@ -134,3 +134,55 @@ backspaceButton.addEventListener("click", () => {
     num2 = num2.substring(0, num2.length - 1);
   }
 });
+
+const addBtn = document.querySelector("#add");
+const subtractBtn = document.querySelector("#subtract");
+const multiplyBtn = document.querySelector("#multiply");
+const divideBtn = document.querySelector("#divide");
+const modBtn = document.querySelector("#mod");
+const dotBtn = document.querySelector("#dot");
+
+document.addEventListener("keydown", (e) => {
+  e.preventDefault();
+  let keyPressed = e.key;
+
+  switch (keyPressed) {
+    case "+":
+      addBtn.click();
+      break;
+    case "-":
+      subtractBtn.click();
+      break;
+    case "*":
+      multiplyBtn.click();
+      break;
+    case "/":
+      divideBtn.click();
+      break;
+    case "%":
+      modBtn.click();
+      break;
+    case ".":
+      dotBtn.click();
+      break;
+    case "=":
+      equalsButton.click();
+      break;
+    case "Enter":
+      equalsButton.click();
+      break;
+    case "Backspace":
+      backspaceButton.click();
+      break;
+    case "Delete":
+      backspaceButton.click();
+      break;
+    case "Escape":
+      clearButton.click();
+      break;
+    default:
+      try {
+        document.getElementById(keyPressed).click();
+      } catch {}
+  }
+});
