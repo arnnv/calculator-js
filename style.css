@@ -89,6 +89,17 @@ body {
   background-color: rgb(10, 87, 164);
 }
 
+.backspace {
+  background-color: rgb(25, 105, 185);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.backspace > img {
+  width: 35%;
+}
+
 .equals {
   background-color: dodgerblue;
 }

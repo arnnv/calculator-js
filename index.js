@@ -7,6 +7,7 @@ const numberButtons = document.querySelectorAll(".num");
 const operationButtons = document.querySelectorAll(".op");
 const equalsButton = document.querySelector("#equals");
 const clearButton = document.querySelector("#clear");
+const backspaceButton = document.querySelector("#backspace");
 
 function roundResult(exp) {
   return Math.round(exp * 1000) / 1000;
@@ -95,6 +96,7 @@ numberButtons.forEach((button) => {
 
 operationButtons.forEach((button) => {
   button.addEventListener("click", () => {
+    removeSelectedOperator();
     if (operator !== "") {
       if (num2 !== "") {
         let operated = performOperation(operator, num1, num2);
@@ -119,4 +121,16 @@ equalsButton.addEventListener("click", () => {
 clearButton.addEventListener("click", () => {
   calculatorDisplay.textContent = "";
   num1 = num2 = operator = "";
+});
+
+backspaceButton.addEventListener("click", () => {
+  let displayText = calculatorDisplay.textContent;
+  displayText = displayText.substring(0, displayText.length - 1);
+  calculatorDisplay.textContent = displayText;
+
+  if (operator === "") {
+    num1 = num1.substring(0, num1.length - 1);
+  } else {
+    num2 = num2.substring(0, num2.length - 1);
+  }
 });
