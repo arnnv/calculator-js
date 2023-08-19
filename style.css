@@ -17,7 +17,7 @@ body {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-  background-color: #edf2fb;
+  background-color: #212529;
 }
 
 .body {
@@ -27,7 +27,7 @@ body {
   align-items: center;
 }
 .calculator {
-  border: 3px solid gray;
+  border: 3px solid #343a40;
   border-radius: 7px;
   display: flex;
   flex-direction: column;
@@ -115,4 +115,13 @@ button:hover {
 
 .buttonClick {
   background-color: #80ed99;
+}
+
+footer {
+  text-align: center;
+  font-size: 32px;
+  font-weight: bold;
+  color: #e9ecef;
+  padding: 4px;
+  background-color: rgb(42, 50, 58);
 }
