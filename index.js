@@ -29,7 +29,7 @@ function modulus(a, b) {
   return roundResult(a % b);
 }
 
-function operate(a, op, b) {
+function performOperation(op, a, b) {
   if (op === "+") return add(a, b);
   if (op === "-") return subtract(a, b);
   if (op === "*") return multiply(a, b);
@@ -41,9 +41,6 @@ function operate(a, op, b) {
     return divide(a, b);
   }
   if (op === "%") return modulus(a, b);
-}
-function performOperation(op, a, b) {
-  return operate(a, op, b);
 }
 
 function removeSelectedOperator() {
