@@ -24,7 +24,7 @@ function multiply(a, b) {
   return roundResult(a * b);
 }
 function divide(a, b) {
-  if (b === 0) {
+  if (b === "0") {
     num1 = num2 = operator = "";
     return "ERROR";
   }
