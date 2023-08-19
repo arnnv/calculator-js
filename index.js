@@ -23,6 +23,10 @@ function multiply(a, b) {
   return roundResult(a * b);
 }
 function divide(a, b) {
+  if (b === 0) {
+    num1 = num2 = operator = "";
+    return "ERROR";
+  }
   return roundResult(a / b);
 }
 function modulus(a, b) {
@@ -33,13 +37,7 @@ function performOperation(op, a, b) {
   if (op === "+") return add(a, b);
   if (op === "-") return subtract(a, b);
   if (op === "*") return multiply(a, b);
-  if (op === "/") {
-    if (b === 0) {
-      num1 = num2 = operator = "";
-      return "ERROR";
-    }
-    return divide(a, b);
-  }
+  if (op === "/") return divide(a, b);
   if (op === "%") return modulus(a, b);
 }
 
